@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="uz">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#131f24">
+  <meta name="description" content="DASLONGO — texnologiyalarni qiziqarli va muntazam o‘rganish platformasi.">
+  <title>DASLONGO — O‘rganishni boshlang</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="./styles.css">
+  <script>
+    tailwind.config = { theme: { extend: { colors: { night: "#131f24", panel: "#1b2b32", line: "#37464f", lime: "#58cc02", sky: "#1cb0f6", fire: "#ff9600" } } } };
+  </script>
+</head>
+<body>
+  <div id="app" class="app-shell">
+    <aside class="sidebar">
+      <a href="#" class="brand" aria-label="DASLONGO bosh sahifa" onclick="return false">DAS<b>LONGO</b></a>
+      <div style="height:25px"></div>
+      <nav aria-label="Asosiy menyu">
+        <button class="nav-btn active" data-view="learn"><span class="nav-icon">🏠</span> O‘rganish</button>
+        <button class="nav-btn" data-view="characters"><span class="nav-icon">🐾</span> Qahramonlar</button>
+        <button class="nav-btn" data-view="leaderboard"><span class="nav-icon">🏅</span> Reyting</button>
+        <button class="nav-btn" data-view="tasks"><span class="nav-icon">🎯</span> Vazifalar</button>
+        <button class="nav-btn" data-view="shop"><span class="nav-icon">🛍️</span> Do‘kon</button>
+        <button class="nav-btn" data-view="profile"><span class="nav-icon">👤</span> Profil</button>
+        <button class="nav-btn" data-view="more"><span class="nav-icon">•••</span> Ko‘proq</button>
+      </nav>
+      <div style="margin-top:auto" class="panel p-4">
+        <div class="section-kicker">Bugungi maqsad</div>
+        <div style="display:flex;justify-content:space-between;margin:9px 0 7px;font-size:12px;font-weight:850"><span id="goal-label">10 daqiqa</span><span id="goal-value">0 / 10 XP</span></div>
+        <div class="quest-progress"><span id="goal-bar" style="width:0%"></span></div>
+        <div class="muted text-xs mt-3">Har kuni oz-ozdan — katta natija!</div>
+      </div>
+    </aside>
+    <main class="main-col">
+      <header class="topbar">
+        <div class="course-head">
+          <div class="course-emblem" id="course-icon">🐍</div>
+          <div>
+            <label class="section-kicker" for="course-select">O‘rganish yo‘nalishi</label><br>
+            <select id="course-select" class="select-course" aria-label="Kursni tanlash"></select>
+          </div>
+        </div>
+        <div class="stats">
+          <div class="stat-pill" title="Jonlar">❤️ <span id="heart-count">3</span><span id="heart-limit">/3</span></div>
+          <div class="stat-pill" title="Tajriba ballari">⚡ <span id="xp-count">0</span></div>
+          <div class="stat-pill" title="Ketma-ket kunlar">🔥 <span id="streak-count">0</span></div>
+          <button id="account-action" class="btn3d btn-dark account-action" onclick="openAccount()">Kirish</button>
+        </div>
+      </header>
+      <section id="main-view" class="view-section"></section>
+    </main>
+    <aside class="side-col">
+      <section class="super-card">
+        <div class="flex justify-between items-center"><span class="crown">✦</span><span class="section-kicker">DASLONGO PLUS</span></div>
+        <h2 class="text-lg font-black mt-2">5 ta yurak bilan o‘rganing</h2>
+        <p id="plus-description">DASLONGO hisobingizga kiring. PLUS holati xavfsiz tarzda server orqali tekshiriladi.</p>
+        <button id="plus-action" class="btn3d btn-dark w-full py-2.5" onclick="openAccount()">Hisobga kirish</button>
+      </section>
+      <section class="panel p-4">
+        <div class="flex justify-between items-center"><h2 class="side-title">Bugungi vazifalar</h2><span style="font-size:12px;color:#58cc02;font-weight:900" id="quest-total">0/3</span></div>
+        <div id="quests-list"></div>
+      </section>
+      <section class="panel p-4 flex items-center gap-3">
+        <div class="cat-mini">🐈</div><div><div class="font-black text-sm">Momi maslahat beradi</div><div class="muted text-xs mt-1">Bir dars ham katta yutuq.</div></div>
+      </section>
+    </aside>
+  </div>
+  <nav class="mobile-nav" aria-label="Mobil menyu">
+    <button class="active" data-view="learn"><span>🏠</span>O‘rganish</button><button data-view="tasks"><span>🎯</span>Vazifalar</button><button data-view="leaderboard"><span>🏅</span>Reyting</button><button data-view="shop"><span>🛍️</span>Do‘kon</button><button data-view="profile"><span>👤</span>Profil</button>
+  </nav>
+
+  <div id="onboarding" class="overlay hidden" role="dialog" aria-modal="true" aria-labelledby="onboard-title">
+    <div class="modal">
+      <div class="modal-top"><span class="brand">DAS<b>LONGO</b></span><div class="step-dots" id="step-dots"></div></div>
+      <div id="onboard-content"></div>
+      <div class="modal-footer"><button id="onboard-back" class="btn3d btn-dark px-5 py-3">Orqaga</button><button id="onboard-next" class="btn3d btn-green px-7 py-3">Davom etish</button></div>
+    </div>
+  </div>
+  <div id="lesson-modal" class="overlay hidden" role="dialog" aria-modal="true" aria-labelledby="lesson-title">
+    <div class="modal">
+      <div class="modal-top"><div class="flex items-center gap-3"><button id="lesson-close" class="btn3d btn-dark px-3 py-2" aria-label="Darsni yopish">×</button><div class="quest-progress" style="width:190px"><span id="lesson-progress" style="width:0%;background:#1cb0f6"></span></div></div><div class="font-black">❤️ <span id="lesson-hearts">3</span></div></div>
+      <div id="lesson-content"></div>
+    </div>
+  </div>
+  <div id="auth-modal" class="overlay hidden" role="dialog" aria-modal="true" aria-labelledby="auth-title">
+    <div class="modal auth-modal">
+      <div class="modal-top">
+        <span class="brand">DAS<b>LONGO</b></span>
+        <button id="auth-close" class="btn3d btn-dark px-3 py-2" aria-label="Oynani yopish">×</button>
+      </div>
+      <h2 id="auth-title">Hisobingizga kiring</h2>
+      <p id="auth-description" class="lead">O‘rganishni davom ettirish uchun tizimga kiring.</p>
+      <div class="auth-providers">
+        <button class="auth-provider" data-auth-provider="google" type="button"><span>G</span> Google bilan davom etish</button>
+        <button class="auth-provider" data-auth-provider="apple" type="button"><span>●</span> Apple bilan davom etish</button>
+        <button class="auth-provider" data-auth-provider="github" type="button"><span>⌘</span> GitHub bilan davom etish</button>
+      </div>
+      <div class="auth-divider"><span>yoki email bilan</span></div>
+      <form id="auth-form">
+        <label id="auth-name-field" class="auth-field hidden">Ismingiz<input id="auth-name" class="field" type="text" maxlength="60" autocomplete="name" placeholder="Ismingiz"></label>
+        <label class="auth-field">Email<input id="auth-email" class="field" type="email" autocomplete="email" required placeholder="siz@example.com"></label>
+        <label class="auth-field">Parol<input id="auth-password" class="field" type="password" minlength="8" autocomplete="current-password" required placeholder="Kamida 8 ta belgi"></label>
+        <button id="auth-submit" class="btn3d btn-green w-full py-3 mt-4" type="submit">Kirish</button>
+      </form>
+      <p id="auth-status" class="auth-status" role="status" aria-live="polite"></p>
+      <div class="auth-switch"><span id="auth-switch-label">Yangi foydalanuvchimisiz?</span> <button id="auth-switch" type="button">Ro‘yxatdan o‘tish</button></div>
+      <p class="auth-footnote">OAuth tugmalari Supabase loyihasida tegishli provayder yoqilgandan keyin ishlaydi.</p>
+    </div>
+  </div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="./js/config.js"></script>
+  <script src="./js/course-data.js"></script>
+  <script src="./js/storage.js"></script>
+  <script src="./js/auth.js"></script>
+  <script src="./js/profile.js"></script>
+  <script src="./js/app.js"></script>
+</body>
+</html>
