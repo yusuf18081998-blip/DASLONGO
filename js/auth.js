@@ -79,6 +79,7 @@
           return;
         }
         status("Hisob yaratildi.");
+        window.setTimeout(close, 500);
       } else {
         const { error } = await client.auth.signInWithPassword({ email, password });
         if (error) throw error;
@@ -107,7 +108,10 @@
       if (error) throw error;
     } catch (error) {
       console.error(`${provider} orqali kirish amalga oshmadi:`, error);
-      status(error.message || `${provider} orqali kirib bo‘lmadi. OAuth sozlamalarini tekshiring.`, true);
+      const message = error.message || "";
+      status(/provider.*not enabled|unsupported provider/i.test(message)
+        ? `Supabase’da ${provider} provayderi yoqilmagan. Authentication → Sign In / Providers bo‘limida uni yoqing, OAuth Client ID/Secret va callback manzilini sozlang.`
+        : message || `${provider} orqali kirib bo‘lmadi. OAuth sozlamalarini tekshiring.`, true);
     }
   }
 
@@ -125,6 +129,25 @@
     }
   }
 
+  async function getCourseLearnerCounts() {
+    if (!client) throw new Error(unavailableMessage());
+    const { data, error } = await client.rpc("get_course_learner_counts");
+    if (error) throw error;
+    return data;
+  }
+
+  async function enrollInCourse(courseId) {
+    if (!client) throw new Error(unavailableMessage());
+    const { error } = await client.rpc("enroll_in_course", { p_course_id: courseId });
+    if (error) throw error;
+  }
+
+  async function unenrollFromCourse(courseId) {
+    if (!client) throw new Error(unavailableMessage());
+    const { error } = await client.rpc("unenroll_from_course", { p_course_id: courseId });
+    if (error) throw error;
+  }
+
   function init(callback) {
     onSessionChange = callback;
     if (!configured()) {
@@ -132,13 +155,14 @@
         button.disabled = true;
         button.title = "OAuth uchun Supabase loyihasi va provayder sozlamasi kerak.";
       });
+      onSessionChange(null, true);
       return;
     }
 
     const { supabaseUrl, supabaseAnonKey } = window.DASLONGO_CONFIG;
     client = window.supabase.createClient(supabaseUrl, supabaseAnonKey);
     client.auth.onAuthStateChange((_event, session) => {
-      onSessionChange(session?.user || null);
+      onSessionChange(session?.user || null, true);
     });
     client.auth.getSession().then(({ data, error }) => {
       if (error) {
@@ -146,7 +170,7 @@
         status("Saqlangan hisobni tekshirib bo‘lmadi.", true);
         return;
       }
-      onSessionChange(data.session?.user || null);
+      onSessionChange(data.session?.user || null, true);
     }).catch(error => {
       console.error("Saqlangan hisob seansini tekshirib bo‘lmadi:", error);
       status(error.message || "Saqlangan hisobni tekshirib bo‘lmadi.", true);
@@ -163,5 +187,14 @@
     if (event.target.id === "auth-modal") close();
   });
 
-  window.DASLONGOAuth = { init, open, close, signOut, isConfigured: configured };
+  window.DASLONGOAuth = {
+    init,
+    open,
+    close,
+    signOut,
+    isConfigured: configured,
+    getCourseLearnerCounts,
+    enrollInCourse,
+    unenrollFromCourse
+  };
 })();
