@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#131f24">
-  <meta name="description" content="DASLONGO — texnologiyalarni qiziqarli va muntazam o‘rganish platformasi.">
+  <meta name="description" content="DASLONGO — dasturlash, tillar, fanlar va yangi ko‘nikmalarni qiziqarli o‘rganish platformasi.">
   <title>DASLONGO — O‘rganishni boshlang</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="./styles.css">
@@ -13,12 +13,41 @@
   </script>
 </head>
 <body>
-  <div id="app" class="app-shell">
+  <main id="landing-page" class="landing-page">
+    <header class="landing-header">
+      <a href="#" class="brand" aria-label="DASLONGO bosh sahifa" onclick="return false">DAS<b>LONGO</b></a>
+      <div class="landing-actions">
+        <button class="btn3d btn-dark px-4 py-2" onclick="openAccount('login')">Kirish</button>
+        <button class="btn3d btn-green px-4 py-2" onclick="openAccount('signup')">Bepul boshlash</button>
+      </div>
+    </header>
+    <section class="landing-hero">
+      <div class="landing-copy">
+        <span class="landing-eyebrow">BILIM OLISHNING YANGI USULI</span>
+        <h1>Har kuni ozgina.<br><span>Katta o‘zgarish sari.</span></h1>
+        <p>Dasturlash, tillar, fanlar va amaliy ko‘nikmalarni o‘zingizga mos kurs bilan o‘rganing. O‘qing, mashq qiling va Momi bilan keyingi bosqichga o‘ting.</p>
+        <div class="landing-cta">
+          <button class="btn3d btn-green px-5 py-3" onclick="openAccount('signup')">Bepul o‘rganishni boshlash <span aria-hidden="true">→</span></button>
+          <button class="landing-login-link" onclick="openAccount('login')">Hisobingiz bormi? Kiring</button>
+        </div>
+        <div class="landing-trust"><span>✓</span> O‘zingizga kerakli kursni tanlang <span>✓</span> O‘qish va testlar birga</div>
+      </div>
+      <div class="landing-mascot" aria-label="Momi mushuk">🐈<span>Salom! Birga o‘rganamizmi?</span></div>
+    </section>
+    <section class="landing-benefits" aria-label="DASLONGO imkoniyatlari">
+      <article><span>📖</span><h2>Avval tushunib o‘rganing</h2><p>Har modulda matn, misol va keyin bilimni tekshiradigan test bor.</p></article>
+      <article><span>🧭</span><h2>O‘z yo‘lingizni tanlang</h2><p>Kerakli yo‘nalish va alohida dastur kursidan boshlang, bosqichlarni navbat bilan oching.</p></article>
+      <article><span>🐾</span><h2>Momi sizga hamroh</h2><p>Kichik kundalik mashqlar bilan o‘z sur’atingizda rivojlaning.</p></article>
+    </section>
+    <footer class="landing-footer">DASLONGO · O‘rganish siz tanlagan yo‘nalishdan boshlanadi.</footer>
+  </main>
+  <div id="app" class="app-shell hidden">
     <aside class="sidebar">
       <a href="#" class="brand" aria-label="DASLONGO bosh sahifa" onclick="return false">DAS<b>LONGO</b></a>
       <div style="height:25px"></div>
       <nav aria-label="Asosiy menyu">
         <button class="nav-btn active" data-view="learn"><span class="nav-icon">🏠</span> O‘rganish</button>
+        <button class="nav-btn" data-view="courses"><span class="nav-icon">📚</span> Kurslar</button>
         <button class="nav-btn" data-view="characters"><span class="nav-icon">🐾</span> Qahramonlar</button>
         <button class="nav-btn" data-view="leaderboard"><span class="nav-icon">🏅</span> Reyting</button>
         <button class="nav-btn" data-view="tasks"><span class="nav-icon">🎯</span> Vazifalar</button>
@@ -35,13 +64,11 @@
     </aside>
     <main class="main-col">
       <header class="topbar">
-        <div class="course-head">
-          <div class="course-emblem" id="course-icon">🐍</div>
-          <div>
-            <label class="section-kicker" for="course-select">O‘rganish yo‘nalishi</label><br>
-            <select id="course-select" class="select-course" aria-label="Kursni tanlash"></select>
-          </div>
-        </div>
+        <button class="course-head course-current-card" type="button" onclick="navigateTo('courses')" aria-label="Kurslar ro‘yxatini ochish">
+          <span class="course-emblem" id="course-icon">🐍</span>
+          <span class="course-current-copy"><span class="section-kicker">JORIY KURS</span><strong id="current-course-name">Python</strong></span>
+          <span class="course-current-arrow" aria-hidden="true">⌄</span>
+        </button>
         <div class="stats">
           <div class="stat-pill" title="Jonlar">❤️ <span id="heart-count">3</span><span id="heart-limit">/3</span></div>
           <div class="stat-pill" title="Tajriba ballari">⚡ <span id="xp-count">0</span></div>
@@ -54,8 +81,8 @@
     <aside class="side-col">
       <section class="super-card">
         <div class="flex justify-between items-center"><span class="crown">✦</span><span class="section-kicker">DASLONGO PLUS</span></div>
-        <h2 class="text-lg font-black mt-2">5 ta yurak bilan o‘rganing</h2>
-        <p id="plus-description">DASLONGO hisobingizga kiring. PLUS holati xavfsiz tarzda server orqali tekshiriladi.</p>
+        <h2 class="text-lg font-black mt-2">Shaxsiy o‘quv tahlili</h2>
+        <p id="plus-description">Tasdiqlangan Plus hisobida 5 yurak, tanlangan kurslar va bajarilgan modullar bo‘yicha jamlangan ko‘rsatkichlar mavjud.</p>
         <button id="plus-action" class="btn3d btn-dark w-full py-2.5" onclick="openAccount()">Hisobga kirish</button>
       </section>
       <section class="panel p-4">
@@ -67,8 +94,8 @@
       </section>
     </aside>
   </div>
-  <nav class="mobile-nav" aria-label="Mobil menyu">
-    <button class="active" data-view="learn"><span>🏠</span>O‘rganish</button><button data-view="tasks"><span>🎯</span>Vazifalar</button><button data-view="leaderboard"><span>🏅</span>Reyting</button><button data-view="shop"><span>🛍️</span>Do‘kon</button><button data-view="profile"><span>👤</span>Profil</button>
+  <nav class="mobile-nav hidden" aria-label="Mobil menyu">
+    <button class="active" data-view="learn"><span>🏠</span>O‘rganish</button><button data-view="courses"><span>📚</span>Kurslar</button><button data-view="tasks"><span>🎯</span>Vazifalar</button><button data-view="shop"><span>🛍️</span>Do‘kon</button><button data-view="profile"><span>👤</span>Profil</button>
   </nav>
 
   <div id="onboarding" class="overlay hidden" role="dialog" aria-modal="true" aria-labelledby="onboard-title">
@@ -106,7 +133,7 @@
       </form>
       <p id="auth-status" class="auth-status" role="status" aria-live="polite"></p>
       <div class="auth-switch"><span id="auth-switch-label">Yangi foydalanuvchimisiz?</span> <button id="auth-switch" type="button">Ro‘yxatdan o‘tish</button></div>
-      <p class="auth-footnote">OAuth tugmalari Supabase loyihasida tegishli provayder yoqilgandan keyin ishlaydi.</p>
+      <p class="auth-footnote">Google xatosi (“Unsupported provider”) ko‘rinsa, Supabase → Authentication → Sign In / Providers’da Google’ni yoqing va Google OAuth Client ID/Secret hamda callback manzilini sozlang.</p>
     </div>
   </div>
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
@@ -114,6 +141,8 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="./js/config.js"></script>
   <script src="./js/course-data.js"></script>
+  <script src="./js/lesson-data.js"></script>
+  <script src="./js/course-catalog.js"></script>
   <script src="./js/storage.js"></script>
   <script src="./js/auth.js"></script>
   <script src="./js/profile.js"></script>

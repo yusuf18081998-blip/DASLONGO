@@ -40,6 +40,13 @@ html,body{width:100%;max-width:100%;overflow-x:clip}
     .auth-switch{text-align:center;margin-top:8px;font-size:13px;color:#a8bbc1}
     .auth-switch button{padding:0;border:0;background:none;color:#80d849;font-weight:900}
     .auth-footnote{margin:14px 0 0;color:#82979f;font-size:11px;line-height:1.5;text-align:center}
+    .lesson-reading{display:grid;gap:14px;max-height:min(52vh,520px);overflow:auto;padding-right:4px}
+    .lesson-reading>p{margin:0;color:#d4e0e3;font-size:14px;line-height:1.75}
+    .lesson-example{margin:0;padding:16px;overflow:auto;border:1px solid #3b5058;border-radius:14px;background:#101d22;color:#d3f5c2;font:13px/1.65 ui-monospace,SFMono-Regular,Consolas,monospace;white-space:pre}
+    .lesson-takeaways{padding:14px 16px;border:1px solid #344850;border-radius:14px;background:#1d3036}
+    .lesson-takeaways h3{margin:0 0 8px;font-size:13px;font-weight:900}
+    .lesson-takeaways ul{display:grid;gap:7px;margin:0;padding-left:19px;color:#b9c9ce;font-size:12px;line-height:1.55}
+    .lesson-footer{position:sticky;bottom:-22px;z-index:1;flex-wrap:wrap;background:#192a30;padding:14px 0 2px}
     .account-card{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-bottom:12px;padding:17px 20px;background:#1b2b32;border:1px solid #37464f;border-radius:18px}
     .account-card strong{display:block;margin-top:5px;font-size:14px;overflow-wrap:anywhere}
     .account-card p{margin:5px 0 0;color:#a8bbc1;font-size:12px}
@@ -161,3 +168,45 @@ html,body{width:100%;max-width:100%;overflow-x:clip}
     @media(prefers-reduced-motion:reduce){
       *,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
     }
+    .course-current-card{padding:7px 12px 7px 7px;border:1px solid #37464f;border-radius:16px;background:#1b2b32;color:var(--white);text-align:left;transition:border-color .16s,transform .16s}.course-current-card:hover{border-color:var(--green);transform:translateY(-1px)}.course-current-copy{display:grid;gap:3px;min-width:0}.course-current-copy strong{max-width:190px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:14px}.course-current-arrow{margin-left:4px;color:#a7bac1}.lesson-module-nav{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:12px 0 18px}.lesson-module-nav span{color:#a7bac1;font-size:12px;font-weight:850;white-space:nowrap}.lesson-module-nav button{font-size:12px}.lesson-module-nav button:disabled{opacity:.45;cursor:not-allowed}.module-gate-note{margin:-8px 0 16px;color:#ffbd5b;font-size:12px;font-weight:750}
+    .catalog-learner-count{display:flex;align-items:center;gap:7px;margin:10px 0 13px;color:#b5c5ca;font-size:12px;font-weight:800}.catalog-learner-count span{font-size:14px}
+    .course-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:14px;margin:14px 0 22px}
+    .catalog-card{position:relative;min-width:0;min-height:214px;overflow:hidden;border:2px solid #37464f;border-bottom-width:4px;border-radius:17px;background:#1a272d;transition:border-color .18s,transform .18s,background .18s}
+    .catalog-card:hover{transform:translateY(-2px);border-color:#52666e;background:#1d2c32}
+    .catalog-card-active{border-color:#58cc02}
+    .catalog-tile{display:flex;width:100%;min-height:210px;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:24px 12px 16px;border:0;background:transparent;color:var(--white);text-align:center}
+    .catalog-tile:focus-visible{outline:3px solid #fff;outline-offset:-5px;border-radius:14px}
+    .catalog-icon{display:grid;width:88px;height:68px;flex:none;place-items:center;border:3px solid #f4f8fa;border-radius:16px;background:#26383e;font-size:40px;line-height:1}
+    .catalog-title{display:-webkit-box;max-width:100%;overflow:hidden;color:#f4f8fa;font-size:14px;font-weight:900;line-height:1.25;text-overflow:ellipsis;-webkit-box-orient:vertical;-webkit-line-clamp:2}
+    .catalog-learner-count{display:block;max-width:100%;margin:0;color:#d0dde0;font-size:12px;font-weight:600;line-height:1.35;overflow-wrap:anywhere}
+    .catalog-progress{color:#91a4ad;font-size:10px;font-weight:800}
+    .catalog-check{position:absolute;top:10px;right:10px;z-index:1;display:grid;width:25px;height:25px;place-items:center;border-radius:6px;background:#79c93b;color:#16251a;font-size:19px;font-weight:1000}
+    .course-remove{position:absolute;top:9px;left:9px;z-index:1;display:grid;width:25px;height:25px;place-items:center;padding:0;border:1px solid #40545e;border-radius:7px;background:#26383e;color:#b8c8cd;font-size:19px;line-height:1}
+    .course-remove:hover{border-color:#ff8177;color:#ffaaa3}
+    @media(max-width:480px){.course-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}.catalog-card{min-height:200px}.catalog-tile{min-height:196px;padding:23px 8px 14px}.catalog-icon{width:80px;height:64px;font-size:37px}.catalog-title{font-size:13px}.catalog-learner-count{font-size:11px}}
+    .landing-page{min-height:100vh;max-width:1200px;margin:0 auto;padding:24px clamp(18px,5vw,64px) 18px}
+    .landing-header{display:flex;align-items:center;justify-content:space-between;gap:14px}
+    .landing-actions,.landing-cta{display:flex;align-items:center;gap:12px}
+    .landing-hero{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(240px,.7fr);align-items:center;gap:36px;min-height:500px;padding:64px 0 52px}
+    .landing-copy{max-width:690px}
+    .landing-eyebrow{display:inline-flex;padding:8px 12px;border:1px solid #456149;border-radius:999px;background:#1a3028;color:#8ce04d;font-size:11px;font-weight:950;letter-spacing:1.2px}
+    .landing-copy h1{margin:18px 0;font-size:clamp(38px,6.3vw,74px);font-weight:1000;line-height:1.02;letter-spacing:-3px}
+    .landing-copy h1 span{color:#8ce04d}
+    .landing-copy>p{max-width:600px;color:#b1c2c7;font-size:17px;line-height:1.75}
+    .landing-cta{flex-wrap:wrap;margin-top:27px}
+    .landing-cta .btn3d{font-size:15px}
+    .landing-login-link{padding:10px;border:0;background:transparent;color:#c3d1d4;font-size:13px;font-weight:800}
+    .landing-login-link:hover{color:#8ce04d}
+    .landing-trust{display:flex;flex-wrap:wrap;gap:10px 18px;margin-top:26px;color:#9eb2b8;font-size:12px;font-weight:750}
+    .landing-trust span{color:#8ce04d}
+    .landing-mascot{position:relative;display:grid;place-items:center;justify-self:center;width:min(290px,70vw);aspect-ratio:1;border:1px solid #3b555e;border-radius:50%;background:radial-gradient(circle at 50% 40%,#31504c 0,#22393b 46%,#1b2b32 70%);font-size:clamp(100px,17vw,174px);filter:drop-shadow(0 18px 26px #0005)}
+    .landing-mascot span{position:absolute;right:-12px;bottom:15%;padding:12px 16px;border:1px solid #40565e;border-radius:15px;background:#25383e;color:#e9f2f4;font-size:13px;font-weight:850;filter:none}
+    .landing-benefits{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+    .landing-benefits article{padding:21px;border:1px solid #344850;border-radius:18px;background:linear-gradient(145deg,#1d3036,#19272d)}
+    .landing-benefits article>span{font-size:26px}
+    .landing-benefits h2{margin:14px 0 7px;font-size:16px;font-weight:950}
+    .landing-benefits p{margin:0;color:#9fb2b8;font-size:13px;line-height:1.65}
+    .landing-footer{padding:25px 0 8px;color:#81969d;text-align:center;font-size:11px}
+    @media(max-width:700px){.landing-page{padding:17px 17px 20px}.landing-hero{grid-template-columns:1fr;gap:22px;min-height:0;padding:62px 0 34px}.landing-copy h1{font-size:clamp(42px,11vw,62px);letter-spacing:-2px}.landing-copy>p{font-size:15px}.landing-mascot{width:180px;font-size:112px}.landing-mascot span{right:-70px;font-size:11px}.landing-benefits{grid-template-columns:1fr}.landing-benefits article{padding:16px}.landing-actions .btn3d{padding:9px 11px;font-size:12px}}
+    @media(prefers-reduced-motion:reduce){.landing-page *{animation:none!important;scroll-behavior:auto!important;transition:none!important}}
+    @media(max-width:480px){.course-current-copy strong{max-width:130px}.lesson-module-nav{gap:5px}.lesson-module-nav button{padding:8px!important;font-size:11px}}

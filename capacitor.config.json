@@ -1,0 +1,9 @@
+{
+  "appId": "uz.daslongo.app",
+  "appName": "DASLONGO",
+  "webDir": "www",
+  "backgroundColor": "#131f24",
+  "android": {
+    "allowMixedContent": false
+  }
+}
