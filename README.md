@@ -41,9 +41,9 @@ The app opens on a public introduction page. The learning dashboard and courses 
    };
    ```
 
-4. To enable Google, Apple, or GitHub, enable the provider under **Authentication → Sign In / Providers** in Supabase and configure its OAuth application credentials. For Google, create a Web OAuth client in Google Cloud, add `https://YOUR_PROJECT.supabase.co/auth/v1/callback` as an authorized redirect URI in Google Cloud, then paste the client ID and secret into Supabase's Google provider settings. Also allow the DASLONGO app URL under **Authentication → URL Configuration**.
+4. To enable Google or GitHub, enable the provider under **Authentication → Sign In / Providers** in Supabase and configure its OAuth application credentials. For Google, create a Web OAuth client in Google Cloud, add `https://YOUR_PROJECT.supabase.co/auth/v1/callback` as an authorized redirect URI in Google Cloud, then paste the client ID and secret into Supabase's Google provider settings. Also allow the DASLONGO app URL under **Authentication → URL Configuration**.
 
-Only public client credentials belong in `js/config.js`. Never put a Supabase service-role key or OAuth client secret in frontend code. If Google login returns `Unsupported provider: provider is not enabled`, the Google provider is not enabled/configured in Supabase; finish the provider setup above. Until authentication is configured, the dashboard remains inaccessible and the app does not simulate a successful login.
+Only public client credentials belong in `js/config.js`. Never put a Supabase service-role key or OAuth client secret in frontend code. If Google or GitHub login returns `Unsupported provider: provider is not enabled`, that provider is not enabled/configured in Supabase; finish the provider setup above. Until authentication is configured, the dashboard remains inaccessible and the app does not simulate a successful login.
 
 ## DASLONGO PLUS
 
