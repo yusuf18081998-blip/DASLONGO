@@ -4,7 +4,7 @@
   "private": true,
   "description": "DASLONGO Android learning app",
   "scripts": {
-    "build:web": "node scripts/build-web.mjs",
+    "build:web": "node scripts/build-web.mjs && tailwindcss --config tailwind.config.cjs --input tailwind.input.css --output www/tailwind.css --minify",
     "android:add": "npm run build:web && cap add android",
     "android:sync": "npm run build:web && cap sync android",
     "android:open": "cap open android"
@@ -14,6 +14,7 @@
     "@capacitor/core": "^8.0.0"
   },
   "devDependencies": {
-    "@capacitor/cli": "^8.0.0"
+    "@capacitor/cli": "^8.0.0",
+    "tailwindcss": "3.4.17"
   }
 }

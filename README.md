@@ -12,6 +12,19 @@ python3 -m http.server 8000
 
 Then open `http://localhost:8000`.
 
+## Deploy to GitHub Pages
+
+Push this project to GitHub on the `main` branch, then in **Settings → Pages** set the build and deployment source to **GitHub Actions**. The workflow builds the site and deploys it after each push to `main`; it can also be started manually from the **Actions** tab. If your deployment branch has a different name, update `.github/workflows/pages.yml`.
+
+Before sharing the site:
+
+1. In Supabase **Authentication → URL Configuration**, set the production site URL and allow the full GitHub Pages URL, including the repository path, such as `https://USERNAME.github.io/REPOSITORY/`.
+2. Enable and configure only the sign-in providers you intend to offer. Provider callback URLs must also be configured with the provider.
+3. Run any required Supabase migrations, including the course learner-count migration below.
+4. Keep service-role keys and OAuth client secrets out of frontend files. The anon/publishable key in `js/config.js` is public by design; protect data with appropriate Supabase Row Level Security policies.
+
+The Pages build compiles Tailwind into a local, minified stylesheet, so the deployed site does not load Tailwind from its CDN.
+
 ## Android app
 
 DASLONGO can be packaged as an Android app with Capacitor. Install Node.js 22 LTS and Android Studio (including its Android SDK), then run these commands from the project folder:
@@ -24,7 +37,7 @@ npm run android:open
 
 `android:add` creates the native Android project the first time. Open it in Android Studio, let Gradle sync, then use **Build → Generate Signed Bundle / APK** to create a release for Google Play. For later web-code changes, run `npm run android:sync` before building again. Keep the generated `android/` project in source control; signing keys and `android/local.properties` must remain private.
 
-The Android wrapper loads the app's local web assets. Supabase authentication and the Tailwind CDN currently require an internet connection. Android OAuth/deep-link handling and production builds still need device/Play Console testing; creating a Capacitor project does not by itself make a Play Store-ready release.
+The Android wrapper loads the app's local web assets. Supabase authentication requires an internet connection. Android OAuth/deep-link handling and production builds still need device/Play Console testing; creating a Capacitor project does not by itself make a Play Store-ready release.
 
 ## Configure sign-in
 
