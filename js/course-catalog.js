@@ -4,7 +4,7 @@
     name,
     icon,
     category,
-    color: "#58cc02",
+    color: "#ffff00",
     description: intro,
     modules,
     curriculum: lessons.map((lesson, index) => ({
