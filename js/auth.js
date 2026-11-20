@@ -101,9 +101,10 @@
       return;
     }
     try {
+      const redirectUrl = new URL(window.location.pathname, window.location.origin).href;
       const { error } = await client.auth.signInWithOAuth({
         provider,
-        options: { redirectTo: window.location.href.split("#")[0] }
+        options: { redirectTo: redirectUrl }
       });
       if (error) throw error;
     } catch (error) {
