@@ -245,7 +245,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 }
 .unit-title h2 { margin: 0; font-size: 16px; font-weight: 900; color: #fff; }
 .unit-title p { margin: 4px 0 0; color: #a5aec0; font-size: 12px; }
-.map-area { position: relative; min-height: 620px; padding: 20px 10px 32px; overflow: hidden; }
+.map-area { position: relative; min-height: 620px; padding: 20px 10px 32px; overflow: visible; }
 .path-line {
   position: absolute;
   top: 54px;
