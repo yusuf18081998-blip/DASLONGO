@@ -3,13 +3,27 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#131f24">
+  <meta name="theme-color" content="#090b0e">
   <meta name="description" content="DASLONGO — dasturlash, tillar, fanlar va yangi ko‘nikmalarni qiziqarli o‘rganish platformasi.">
   <title>DASLONGO — O‘rganishni boshlang</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="./styles.css">
   <script>
-    tailwind.config = { theme: { extend: { colors: { night: "#131f24", panel: "#1b2b32", line: "#37464f", lime: "#58cc02", sky: "#1cb0f6", fire: "#ff9600" } } } };
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            night: "#090b0e",
+            panel: "#11141a",
+            line: "#282f3c",
+            lime: "#ffff00",
+            sky: "#ffff00",
+            fire: "#ffff00",
+            neon: "#ffff00"
+          }
+        }
+      }
+    };
   </script>
 </head>
 <body>
@@ -32,11 +46,11 @@
         </div>
         <div class="landing-trust"><span>✓</span> O‘zingizga kerakli kursni tanlang <span>✓</span> O‘qish va testlar birga</div>
       </div>
-      <div class="landing-mascot" aria-label="Momi mushuk">🐈<span>Salom! Birga o‘rganamizmi?</span></div>
+      <div class="landing-mascot" aria-label="Momi mushuk"><img src="./assets/momi-cat.jpeg" alt="Momi mushuk"><span>Salom! Birga o‘rganamizmi?</span></div>
     </section>
     <section class="landing-benefits" aria-label="DASLONGO imkoniyatlari">
       <article><span>📖</span><h2>Avval tushunib o‘rganing</h2><p>Har modulda matn, misol va keyin bilimni tekshiradigan test bor.</p></article>
-      <article><span>🧭</span><h2>O‘z yo‘lingizni tanlang</h2><p>Kerakli yo‘nalish va alohida dastur kursidan boshlang, bosqichlarni navbat bilan oching.</p></article>
+      <article><span class="momi-benefit"><img src="./assets/momi-cat.jpeg" alt=""></span><h2>O‘z yo‘lingizni tanlang</h2><p>Kerakli yo‘nalish va alohida dastur kursidan boshlang, bosqichlarni navbat bilan oching.</p></article>
       <article><span>🐾</span><h2>Momi sizga hamroh</h2><p>Kichik kundalik mashqlar bilan o‘z sur’atingizda rivojlaning.</p></article>
     </section>
     <footer class="landing-footer">DASLONGO · O‘rganish siz tanlagan yo‘nalishdan boshlanadi.</footer>
@@ -86,11 +100,11 @@
         <button id="plus-action" class="btn3d btn-dark w-full py-2.5" onclick="openAccount()">Hisobga kirish</button>
       </section>
       <section class="panel p-4">
-        <div class="flex justify-between items-center"><h2 class="side-title">Bugungi vazifalar</h2><span style="font-size:12px;color:#58cc02;font-weight:900" id="quest-total">0/3</span></div>
+        <div class="flex justify-between items-center"><h2 class="side-title">Bugungi vazifalar</h2><span style="font-size:12px;color:#ffff00;font-weight:900" id="quest-total">0/3</span></div>
         <div id="quests-list"></div>
       </section>
       <section class="panel p-4 flex items-center gap-3">
-        <div class="cat-mini">🐈</div><div><div class="font-black text-sm">Momi maslahat beradi</div><div class="muted text-xs mt-1">Bir dars ham katta yutuq.</div></div>
+        <div class="cat-mini"><img src="./assets/momi-cat.jpeg" alt=""></div><div><div class="font-black text-sm">Momi maslahat beradi</div><div class="muted text-xs mt-1">Bir dars ham katta yutuq.</div></div>
       </section>
     </aside>
   </div>
@@ -107,7 +121,7 @@
   </div>
   <div id="lesson-modal" class="overlay hidden" role="dialog" aria-modal="true" aria-labelledby="lesson-title">
     <div class="modal">
-      <div class="modal-top"><div class="flex items-center gap-3"><button id="lesson-close" class="btn3d btn-dark px-3 py-2" aria-label="Darsni yopish">×</button><div class="quest-progress" style="width:190px"><span id="lesson-progress" style="width:0%;background:#1cb0f6"></span></div></div><div class="font-black">❤️ <span id="lesson-hearts">3</span></div></div>
+      <div class="modal-top"><div class="flex items-center gap-3"><button id="lesson-close" class="btn3d btn-dark px-3 py-2" aria-label="Darsni yopish">×</button><div class="quest-progress" style="width:190px"><span id="lesson-progress" style="width:0%;background:linear-gradient(90deg, #ffff00, #ffff00)"></span></div></div><div class="font-black">❤️ <span id="lesson-hearts">3</span></div></div>
       <div id="lesson-content"></div>
     </div>
   </div>
